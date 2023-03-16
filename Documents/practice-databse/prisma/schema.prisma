@@ -11,14 +11,14 @@ datasource db {
 }
 
 model User {
-  id          Int       @id @default(autoincrement())
+  id          Int         @id @default(autoincrement())
   name        String 
-  email       String    @unique 
+  email       String      @unique 
   password    String 
   posts       Post[]
-  role        Role      @default(USER)
-  createAt    DateTime  @default(now())   @map("created_at")
-  updateAt    DateTime  @default(now())        @map("update_at")
+  role        Role        @default(USER)
+  createAt    DateTime    @default(now())   @map("created_at")
+  updateAt    DateTime    @default(now())        @map("update_at")
   comment     Comment[] 
   gender      Gender
   
@@ -26,29 +26,29 @@ model User {
 }
 
 model Post {
-  id          Int       @id @default(autoincrement()) 
-  authorId    Int
+  id          Int         @id @default(autoincrement()) 
+  authorId    Int 
   title       String  
   content     String?
-  author      User      @relation(fields: [authorId], references: [id])
-  createAt    DateTime  @default(now())   @map("created_at")
-  updateAt    DateTime  @default(now())        @map("update_at")
+  author      User        @relation(fields: [authorId], references: [id])
+  createAt    DateTime    @default(now())   @map("created_at")
+  updateAt    DateTime    @default(now())        @map("update_at")
   comment     Comment[]
 
   @@map("posts")
 }
 
 model Comment {
-  id        Int         @id @default(autoincrement())
-  postId    Int         @map("post_id")
-  authorId  Int         @map("author_id")
-  body      String
-  createAt    DateTime  @default(now())   @map("created_at")
-  updateAt    DateTime  @default(now())        @map("update_at")
-  author    User        @relation(fields: [authorId], references: [id])
-  post      Post        @relation(fields: [postId], references: [id])
+  id          Int         @id @default(autoincrement())
+  postId      Int         @map("post_id")
+  authorId    Int         @map("author_id")
+  body        String
+  createAt    DateTime    @default(now())   @map("created_at")
+  updateAt    DateTime    @default(now())        @map("update_at")
+  author      User        @relation(fields: [authorId], references: [id])
+  post        Post        @relation(fields: [postId], references: [id])
       
-  @@map("comment")
+  @@map("comments")
 }
 
 enum Gender {
